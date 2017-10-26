@@ -2,36 +2,37 @@ import datetime
 
 from django.db import models
 
-from applications.academic_information.models import Course
-from applications.globals.models import ExtraInfo, Faculty, Student
+from applications.academic_information.models import Course, Student
+from applications.globals.models import ExtraInfo, Faculty
 
 # Create your models here.
 
 
 class Constants:
     SEM_CHOICES = (
-        ('1', '1')
-        ('2', '2')
-        ('3', '3')
-        ('4', '4')
-        ('5', '5')
-        ('6', '6')
-        ('7', '7')
-        ('8', '8')
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+        ('6', '6'),
+        ('7', '7'),
+        ('8', '8'),
     )
 
 
 class Register(models.Model):
     r_id = models.IntegerField(primary_key=True)
-    course_id = models.ForeignKey(Course)
+    course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
     year = models.IntegerField(default=datetime.datetime.now().year)
-    student_id = models.ForeignKey(Student)
+    student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
+    semester = models.IntegerField()
 
     class Meta:
         db_table = 'Register'
 
     def __str__(self):
-        return self.r_id
+        return str(self.r_id)
 
 
 class Thesis(models.Model):
@@ -48,9 +49,9 @@ class Thesis(models.Model):
 
 
 class FinalRegistrations(models.Model):
-    reg_id = models.ForeignKey(ExtraInfo)
-    sem = models.IntegerField(max_length=1, choices=Constants.SEM_CHOICES)
-    student_id = models.ForeignKey(Student)
+    reg_id = models.ForeignKey(ExtraInfo, on_delete=models.CASCADE)
+    semester = models.IntegerField()
+    student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
     registration = models.BooleanField(default=False)
 
     def __str__(self):

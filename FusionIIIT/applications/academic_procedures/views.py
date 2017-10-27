@@ -1,25 +1,22 @@
 import datetime
+
+# from django.views import View
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Max
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
+
 # from applications.academic_procedures.models import Register
 from applications.academic_information.models import Course, Student
 from applications.globals.models import ExtraInfo
+
 from .models import FinalRegistrations, Register
 
 # from . forms import AddDropCourseForm
 
 # Create your views here.
-
-class PreRegistrationView(View):
-    def get(self, request, *args, **kwargs):
-        context = {
-
-        }
-        return render(request, template.html, context)
 
 
 @login_required(login_url='/accounts/login')
@@ -90,6 +87,12 @@ def get_user_branch(user_details):
 
 @login_required(login_url='/accounts/login')
 def add_course(request):
+    if request.method=='POST':
+        print(request.POST)
+        return HttpResponse('Beauty')
+
+
+def drop_course(request):
     current_user = get_object_or_404(User, username=request.user.username)
     user_details = ExtraInfo.objects.all().filter(user=current_user).first()
     # Fuction Call to get the current semster of the Student

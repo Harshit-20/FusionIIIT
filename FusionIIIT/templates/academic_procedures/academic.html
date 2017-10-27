@@ -36,17 +36,22 @@
                  style="max-width: 320px;">
 
                  <a class="item" data-tab="fourth">
-                    Register
+                    Pre Registration
                     <i class="right floated chevron right icon"></i>
                 </a>
 
-                <a class="active item" data-tab="first">
-                    Add a Course
+                <a class="active item" data-tab="sixth">
+                    Registered Courses
+                    <i class="right floated chevron right icon"></i>
+                </a>
+
+                <a class="item" data-tab="first">
+                    Add Courses
                     <i class="right floated chevron right icon"></i>
                 </a>
 
                 <a class="item" data-tab="second">
-                    Drop a Course
+                    Drop Courses
                     <i class="right floated chevron right icon"></i>
                 </a>
 
@@ -67,20 +72,22 @@
         {% endcomment %}
         <div class="eight wide column">
             {% comment %}The ... start here!{% endcomment %}
-            <div class="ui active tab segment" data-tab="first">
-                {% block lodgecomplaint %}
-                    {%  include 'academic_procedures/addCourse.html' %}
-                {%  endblock %}
+            <div class="ui active tab segment" data-tab="sixth">
+                {%  include 'academic_procedures/registeredCourse.html' %}
             </div>
             {% comment %}The ... end here!{% endcomment %}
 
-            {% comment %}The ... starts here!{% endcomment %}
-            <div class="ui tab segment" data-tab="second">
-                {% block complainthistory %}
-                    {%  include 'complaintModule/complainthistory.html' %}
-                {%  endblock %}
+            {% comment %}The ... start here!{% endcomment %}
+            <div class="ui tab segment" data-tab="first">
+                {%  include 'academic_procedures/addCourse.html' %}
             </div>
-            {% comment %}The ... ends here!{% endcomment %}
+            {% comment %}The ... end here!{% endcomment %}
+
+            {% comment %}The ... start here!{% endcomment %}
+            <div class="ui tab segment" data-tab="second">
+                {%  include 'academic_procedures/dropCourse.html' %}
+            </div>
+            {% comment %}The ... end here!{% endcomment %}
 
             {% comment %}The ... starts here!{% endcomment %}
             <div class="ui tab segment" data-tab="third">

@@ -4,7 +4,7 @@
     {% comment %}The tab menu starts here!{% endcomment %}
     <div class="ui pointing secondary menu">
         <a class="active item" data-tab="complainthistory">
-            Add Course(s)
+            Drop Course(s)
         </a>
     </div>
 
@@ -43,7 +43,7 @@
                 </thead>
 
                 <tbody>
-                <form action='/academic-procedures/addCourse/' method='post'>
+                <form action='/academic-procedures/drop_course/' method='post'>
                     {% csrf_token %}
                         {% for items in courses_list %}
                             <tr>
@@ -67,7 +67,7 @@
                             </tr>
                         {% endfor %}
 
-                    <center><button class="ui positive basic button">Add Course(s)</button></center>
+                    <center><button class="ui positive basic button">Drop Course(s)</button></center>
 
                 </form>
                 </tbody>

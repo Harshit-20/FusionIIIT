@@ -10,6 +10,7 @@
 
     <div class="ui active tab" data-tab="complainthistory">
         <div class="ui vertical segment">
+        <form action='/academic-procedures/register/' method='post'>
             <table class="ui very basic collapsing celled sortable table"
                    style="padding-left: 2.5%;
                                                           padding-right: 2.5%;
@@ -43,41 +44,45 @@
                 </thead>
 
                 <tbody>
-                <form action='/academic-procedures/addCourse/' method='post'>
+
                     {% csrf_token %}
-                        {% for items in courses_list %}
-                            <tr>
-                                <td>
-                                </td>
-                                <td>
-                                    {{ items.course_id }}
-                                </td>
-                                <td>
-                                    {{ items.course_name}}
-                                </td>
-                                <td>
-                                    {{ items.credits }}
-                                 </td>
-                                 <td>
-                                    {{items.sem}}
-                                 </td>
-                                <td>
-                                    <input name="choice" type="checkbox" value="">
-                                </td>
-                            </tr>
+                            {% for items in add_course %}
+                                    <tr>
+                            <td>
+                            </td>
+                            <td>
+                                {{ items.course_id }}
+                                {% if items.course_id|length > 5%}
+                                    (optional)
+                                {% endif %}
+                                <input type="text" name='course_id' value='{{ items.course_id}}' hidden="True">
+                            </td>
+                            <td>
+                                {{ items.course_name}}
+                                <input type="text" name='course_name' value='{{ items.course_name}}' hidden="True">
+                            </td>
+                            <td>
+                                {{items.sem}}
+                                <input type="text" name='semester' value='{{ items.sem}}' hidden="True">
+                             </td>
+                             <td>
+                                {{ items.credits }}
+                                <input type="text" name='credits' value='{{ items.credits}}' hidden="True">
+                             </td>
+                             <td>
+                                <input type="text" name='user' value='{{ details.current_user}}' hidden="True">
+                                <input name="choice" type="checkbox" value="{{ items.course_id }}">
+                             </td>
+                        </tr>
                         {% endfor %}
-
-                    <center><button class="ui positive basic button">Add Course(s)</button></center>
-
-                </form>
                 </tbody>
             </table>
 
-            <br>
+
             <div class="ui divider"></div>
+            <center><button class="ui positive basic button">Add Course(s)</button></center>
 
-
-
+        </form>
         </div>
     </div>
 

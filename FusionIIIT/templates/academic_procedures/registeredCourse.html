@@ -39,14 +39,16 @@
                     <th>
                         Semester
                     </th>
+                    <th>
+                        Selected
+                    </th>
 
                 </tr>
                 </thead>
 
                 <tbody>
                 
-                    <form action='/academic-procedures/finalregister/' method='post'>
-                    {% csrf_token %}
+
                     {% for items in courses_list %}
                         <tr>
                             <td>
@@ -74,9 +76,10 @@
                                 <input type="text" name='user' value='{{ details.current_user}}' hidden="True">
                                 {% for x in final_register %}
                                     {% if items.course_id == x.course_id.course_id %}
-                                        Selected
+                                        Yes
                                     {% endif %}
                                 {% endfor %}
+
                              </td>
                         </tr>
                     {% endfor %}
@@ -86,7 +89,7 @@
             <br>
             <div class="ui divider"></div>
 
-            </form>
+
             {% endif %}
         </div>
     </div>
